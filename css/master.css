@@ -118,6 +118,10 @@
   .display-6{
     display:none;
   }
+  /* .lead{
+      font-size: 36px;
+      letter-spacing: 8px;
+  } */
 }
 
 @media (max-width: 767px) and (min-width: 576px){
