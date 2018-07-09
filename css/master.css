@@ -1,0 +1,76 @@
+.bg-pink {
+    background-color: #cca1bc;
+}
+
+.bg-green {
+    background-color: #bccca1;
+}
+
+.bg-tan{
+    background-color: #cca9a1;
+}
+
+.bg-blue{
+    background-color: #a1ccc1
+}
+
+.headlinetext{
+      padding-top:20px;
+      padding-left:60px;
+      margin-bottom:20px:
+}
+
+
+
+.heading{
+    padding-top:20px;
+    padding-left:10px;
+}
+
+.lead{
+    font-family: 'Slabo 27px', serif;
+}
+
+.page-row {
+    padding-top:20px;
+    padding-bottom:20px;
+    margin-bottom:2px;
+
+
+}
+
+.num {
+    font-size: 3em;
+    margin-bottom: 0px;
+}
+
+.box {
+    border: 3px;
+    border-style: solid;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.ReaderImage{
+    margin-bottom: 15px;
+}
+
+.button-row {
+    margin-top: 10px;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.link-row {
+    padding-top:10px;
+}
+
+.display-5 {
+    font-size: 5.8vw;
+}
+
+.display-6 {
+    font-size: 3.8vw;
+}
