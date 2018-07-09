@@ -14,30 +14,28 @@
     background-color: #a1ccc1
 }
 
-.headlinetext{
-      padding-top:20px;
-      padding-left:60px;
-      margin-bottom:20px:
+.text-box{
+    padding: 10px 50px 10px 50px;
 }
 
+.image-box{
 
+}
 
 .heading{
     padding-top:20px;
     padding-left:10px;
+    font-size: 22px;
 }
 
 .lead{
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
-.page-row {
-    padding-top:20px;
-    padding-bottom:20px;
-    margin-bottom:2px;
-
-
-}
 
 .num {
     font-size: 3em;
@@ -47,14 +45,13 @@
 .box {
     border: 3px;
     border-style: solid;
-    border-radius: 20px;
-    margin: 5px;
+    border-radius: 10px;
+    margin:10px;
 }
 
-.ReaderImage{
-    margin-bottom: 15px;
+.outer-row{
+    margin-bottom:5px;
 }
-
 .button-row {
     margin-top: 10px;
 }
@@ -68,9 +65,84 @@
 }
 
 .display-5 {
-    font-size: 5.8vw;
+    font-size: 3.5vw;
 }
 
 .display-6 {
-    font-size: 3.8vw;
+    font-size: 2.5vw;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+}
+
+.no-padding {
+    padding-left:0;
+    padding-right:0;
+}
+
+/* A wrapper for your images to transition */
+.transition-wrapper {
+  position: relative;
+  left:0;
+  margin:0 auto;
+}
+
+/* Position each image and apply a transition */
+.transition-wrapper img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Automatically hide an image during hover (to reveal the other one) */
+.transition-wrapper img:last-of-type:hover {
+  opacity:0;
+}
+
+
+.headlinetext{
+      padding-top:5%;
+      padding-left:5%;
+}
+
+@media (max-width: 575px){
+    .display-5 {
+        display:none;
+    }
+  .display-6{
+    display:none;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px){
+    .display-5 {
+        font-size: 5vw !important;
+    }
+  .display-6{
+    font-size: 4vw !important;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px){
+    .display-5 {
+        font-size: 4.5vw !important;
+    }
+  .display-6{
+    font-size: 3.5vw !important;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 992px){
+    .display-5 {
+        font-size: 4vw !important;
+    }
+  .display-6{
+    font-size: 3vw !important;
+  }
 }
