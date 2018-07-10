@@ -18,9 +18,7 @@
     padding: 10px 50px 10px 50px;
 }
 
-.image-box{
 
-}
 
 .heading{
     padding-top:20px;
@@ -194,4 +192,19 @@
 	-webkit-transform: perspective(300px) rotateY(40deg) rotateX(50deg);
 	-moz-transform: perspective(300px) rotateY(40deg) rotateX(50deg);
 	transform: perspective(300px) rotateY(40deg) rotateX(50deg);
+}
+
+
+.no-underline, .no-underline:hover{
+    text-decoration: none;
+}
+
+.rounded-10 {
+    border-radius: 10px;
+}
+
+#about-signature{
+    font-family: 'Homemade Apple', cursive;
+    font-size:28px;
+    margin-left:20px;
 }
