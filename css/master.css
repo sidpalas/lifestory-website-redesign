@@ -1,31 +1,3 @@
-.bg-pink {
-    background-color: #cca1bc;
-}
-
-.bg-green {
-    background-color: #bccca1;
-}
-
-.bg-tan{
-    background-color: #cca9a1;
-}
-
-.bg-blue{
-    background-color: #a1ccc1
-}
-
-.text-box{
-    padding: 10px 50px 10px 50px;
-}
-
-
-
-.heading{
-    padding-top:20px;
-    padding-left:10px;
-    font-size: 22px;
-}
-
 .lead{
     font-family: 'Lato', sans-serif;
     font-weight: 400;
@@ -33,7 +5,6 @@
     letter-spacing: 4px;
     text-transform: uppercase;
 }
-
 
 .num {
     font-size: 3em;
@@ -47,29 +18,6 @@
     margin:10px;
 }
 
-.outer-row{
-    margin-bottom:5px;
-}
-.button-row {
-    margin-top: 10px;
-}
-
-.text-underline {
-    text-decoration: underline;
-}
-
-.link-row {
-    padding-top:10px;
-}
-
-.display-5 {
-    font-size: 3.5vw;
-}
-
-.display-6 {
-    font-size: 2.5vw;
-}
-
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -79,10 +27,6 @@
 .no-padding {
     padding-left:0;
     padding-right:0;
-}
-
-.image-shadow {
-    box-shadow: 10px 8px #888888;
 }
 
 /* A wrapper for your images to transition */
@@ -105,52 +49,6 @@
 /* Automatically hide an image during hover (to reveal the other one) */
 .transition-wrapper img:last-of-type:hover {
   opacity:0;
-}
-
-
-.headlinetext{
-      padding-top:5%;
-      padding-left:5%;
-}
-
-@media (max-width: 575px){
-    .display-5 {
-        display:none;
-    }
-  .display-6{
-    display:none;
-  }
-  /* .lead{
-      font-size: 36px;
-      letter-spacing: 8px;
-  } */
-}
-
-@media (max-width: 767px) and (min-width: 576px){
-    .display-5 {
-        font-size: 5vw !important;
-    }
-  .display-6{
-    font-size: 4vw !important;
-  }
-}
-
-@media (max-width: 991px) and (min-width: 768px){
-    .display-5 {
-        font-size: 4.5vw !important;
-    }
-  .display-6{
-    font-size: 3.5vw !important;
-  }
-}
-
-@media (max-width: 1200px) and (min-width: 992px){
-    .display-5 {
-        font-size: 4vw !important;
-    }
-  .display-6{
-    font-size: 3vw !important;
-  }
 }
 
 
