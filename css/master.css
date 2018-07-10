@@ -6,27 +6,21 @@
     text-transform: uppercase;
 }
 
-.num {
-    font-size: 3em;
-    margin-bottom: 0px;
-}
-
-.box {
+.process-box {
     border: 3px;
     border-style: solid;
     border-radius: 10px;
     margin:10px;
 }
 
-.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-
+.no-underline, .no-underline:hover{
+    text-decoration: none;
 }
 
-.no-padding {
-    padding-left:0;
-    padding-right:0;
+#about-signature{
+    font-family: 'Homemade Apple', cursive;
+    font-size:28px;
+    margin-left:20px;
 }
 
 /* A wrapper for your images to transition */
@@ -90,19 +84,4 @@
 	-webkit-transform: perspective(300px) rotateY(40deg) rotateX(50deg);
 	-moz-transform: perspective(300px) rotateY(40deg) rotateX(50deg);
 	transform: perspective(300px) rotateY(40deg) rotateX(50deg);
-}
-
-
-.no-underline, .no-underline:hover{
-    text-decoration: none;
-}
-
-.rounded-10 {
-    border-radius: 10px;
-}
-
-#about-signature{
-    font-family: 'Homemade Apple', cursive;
-    font-size:28px;
-    margin-left:20px;
 }
