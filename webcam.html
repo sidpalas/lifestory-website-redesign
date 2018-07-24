@@ -5,26 +5,17 @@
         <title></title>
     </head>
     <body>
-        <form id="form1" runat="server">
-            <input type='file' id="imgInp" />
-            <img id="blah" src="#" alt="your image" />
-        </form>
-
+        <video id="player" controls autoplay></video>
         <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+          const player = document.getElementById('player');
 
-                reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
-                }
+          const constraints = {
+            video: true,
+          };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-            }
-
-            $("#imgInp").change(function(){
-            readURL(this);
+          navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+              player.srcObject = stream;
             });
         </script>
     </body>
