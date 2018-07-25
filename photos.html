@@ -27,27 +27,27 @@
             </div>
         </header>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-          Launch demo modal
-        </button>
-
         <!-- Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLongTitle">Please provide your email and purchase code &#42;</h5>
               </div>
               <div class="modal-body">
-                ...
+                  <form>
+                    <div>
+                      <input id="email" type="text" placeholder="Email...">
+                    </div>
+                    <div>
+                      <input id="password" type="password" placeholder="Purchase code...">
+                    </div>
+                  </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <h6>&#42;You must log in before submitting photos.</h6>
+                <button type="button" id="skipLogin" class="btn btn-secondary" data-dismiss="modal">Skip Login</button>
+                <button type="button" id="sign-in" class="btn btn-primary" data-dismiss="modal">Validate User</button>
               </div>
             </div>
           </div>
@@ -210,18 +210,14 @@
             </div>
             <div class="col-xl-4 col-sm-6 col text-center">
 
-                <h5>Please enter your email and purchase code to submit your photos</h5>
-                <form>
-                  <div>
-                    <input id="email" type="text" placeholder="Email...">
-                  </div>
-                  <div>
-                    <input id="password" type="password" placeholder="Purchase code...">
-                  </div>
-                  <div>
-                    <button id="sign-in">Submit Photos</button>
-                  </div>
-                </form>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" id="loginModalButton" data-toggle="modal" data-target="#loginModal">
+                  Log In
+                </button>
+                <!-- Button trigger modal -->
+                <button type="button" id="submitPhotos" class="btn btn-primary">
+                  Submit Photos
+                </button>
 
             </div>
             <div class="col-xl-4 col-sm-3 d-none d-sm-block">
@@ -263,7 +259,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-storage.js"></script>
+
         <script>
           // Initialize Firebase
           var config = {
@@ -274,8 +273,19 @@
             storageBucket: "lifestory-181703.appspot.com",
           };
           firebase.initializeApp(config);
+          firebase.auth().signOut();
           var uploadedImages = [];
-          // Create a root reference
+        </script>
+
+        <!--Handle auth events-->
+        <script>
+          firebase.auth().onAuthStateChanged(function(user){
+            window.user = user;
+            if (window.user != null){
+                document.querySelector('#loginModalButton').disabled = true;
+                document.querySelector('#loginModalButton').innerText = "Already Logged In";
+            }
+          });
         </script>
 
         <!--Handle page events-->
@@ -285,25 +295,28 @@
             e.stopPropagation();
             var email = document.querySelector('#email').value;
             var password = document.querySelector('#password').value
-            var ref = firebase.storage().ref();
-            console.log(uploadedImages);
-            var auth = firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-                //upload the photos...
-                for (let i=0;i<uploadedImages.length;i++){
-                    var img = uploadedImages[i];
-                    var imgNum = i + 1
-                    var task = ref.child('photo'+ String(imgNum)).put(img).then(function(snapshot) {
-                      console.log('Uploaded image' + String(imgNum));
-                        });
-                    }
+            var auth = firebase.auth().signInWithEmailAndPassword(email, password).then(function(credential){
+                console.log('login successful!');
+                $('#loginModal').modal('hide')
             }).catch(function(error) {
                   // Handle Errors here.
                   var errorCode = error.code;
                   var errorMessage = error.message;
                   console.log(errorCode, errorMessage);
                   //display error message to user...
-
               });
+          });
+
+          document.querySelector('#submitPhotos').addEventListener('click', function(e) {
+            var ref = firebase.storage().ref();
+            console.log(uploadedImages);
+            for (let i=0;i<uploadedImages.length;i++){
+                var img = uploadedImages[i];
+                var imgNum = i + 1
+                var task = ref.child('photo'+ String(imgNum)).put(img).then(function(snapshot) {
+                  console.log('Uploaded image' + String(imgNum));
+                    });
+                }
           });
         </script>
 
