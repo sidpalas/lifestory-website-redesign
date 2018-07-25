@@ -255,26 +255,25 @@
             e.stopPropagation();
             var email = document.querySelector('#email').value;
             var password = document.querySelector('#password').value
-            var auth = firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              console.log(errorCode, errorMessage);
-              //display error message to user...
-
-              // ...
-            });
-
-            //upload the photos...
-            const ref = firebase.storage().ref();
+            var ref = firebase.storage().ref();
             console.log(uploadedImages);
-            for (let i=0;i<uploadedImages.length;i++){
-                var img = uploadedImages[i];
-                var imgNum = i + 1
-                var task = ref.child('photo'+ String(imgNum)).put(img).then(function(snapshot) {
-                  console.log('Uploaded image' + String(imgNum));
-                });
-            }
+            var auth = firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+                //upload the photos...
+                for (let i=0;i<uploadedImages.length;i++){
+                    var img = uploadedImages[i];
+                    var imgNum = i + 1
+                    var task = ref.child('photo'+ String(imgNum)).put(img).then(function(snapshot) {
+                      console.log('Uploaded image' + String(imgNum));
+                        });
+                    }
+            }).catch(function(error) {
+                  // Handle Errors here.
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  console.log(errorCode, errorMessage);
+                  //display error message to user...
+
+              });
           });
         </script>
 
