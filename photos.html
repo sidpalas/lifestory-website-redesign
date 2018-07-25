@@ -8,6 +8,10 @@
         <link rel="stylesheet" href="./css/master.css">
         <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
     </head>
     <body>
         <header>
@@ -22,11 +26,11 @@
             </nav>
             </div>
         </header>
-        <div class="row outer-row text-left mx-1">
+        <div class="row outer-row text-center mx-1">
             <div class="col-xl-3 col-sm-2 d-none d-sm-block">
             </div>
             <div class="col-xl-6 col-sm-8 col">
-                <h2 class = "text-center">Taking your LifeStory Kidsbooks Photos</h2>
+                <h2>Taking your LifeStory Kidsbooks Photos</h2>
                 <p>Any camera works well, including the one on your smart phone. Your main focus will be getting your kid’s personality to come out.</p>
                 <p>You don’t have to replicate the poses or expressions exactly. In fact, a few silly photos make for the most fun and unique books.</p>
                 <ol>
@@ -167,6 +171,28 @@
                 <p>What’s your kid got for a growl?! Have them do their biggest, meanest growl, baring their teeth and all. Have them look off to the side of the camera for the right angle.</p>
                 <img class="my-1" id="photoDisplay10" src="images/examplePhotos/examplePhoto10.png" alt="example photo #10" width="250px">
                 <input type="file" id="photoUpload10" accept="image/*" capture="camera" onchange="handleFiles(this.files, '10')"/>
+                <hr>
+            </div>
+            <div class="col-xl-4 col-sm-3 d-none d-sm-block">
+            </div>
+        </div>
+        <div class="row outer-row text-center">
+            <div class="col-xl-4 col-sm-3 d-none d-sm-block">
+            </div>
+            <div class="col-xl-4 col-sm-6 col text-center">
+
+                <form>
+                  <div>
+                    <input id="email" type="text" placeholder="Email...">
+                  </div>
+                  <div>
+                    <input id="password" type="password" placeholder="Password...">
+                  </div>
+                  <div>
+                    <button id="sign-in">Sign In</button>
+                  </div>
+                </form>
+
             </div>
             <div class="col-xl-4 col-sm-3 d-none d-sm-block">
             </div>
@@ -188,10 +214,9 @@
         </footer>
         <script type="text/javascript">
             function handleFiles(files, imgNum) {
-              console.log(files);
               for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-
+                uploadedImages[parseInt(imgNum)-1] = file;
                 if (!file.type.startsWith('image/')){ continue }
 
                 let picId = "photoDisplay" + imgNum;
@@ -207,5 +232,51 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyD8IEpw9EJ-wtP18T7UY-Z8gZTUXG1fF4o",
+            authDomain: "lifestory-181703.firebaseapp.com",
+            databaseURL: "https://lifestory-181703.firebaseio.com",
+            projectId: "lifestory-181703",
+            storageBucket: "lifestory-181703.appspot.com",
+          };
+          firebase.initializeApp(config);
+          var uploadedImages = [];
+          // Create a root reference
+        </script>
+
+        <!--Handle page events-->
+        <script>
+          document.querySelector('#sign-in').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var email = document.querySelector('#email').value;
+            var password = document.querySelector('#password').value
+            var auth = firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorCode, errorMessage);
+              //display error message to user...
+
+              // ...
+            });
+
+            //upload the photos...
+            const ref = firebase.storage().ref();
+            console.log(uploadedImages);
+            for (let i=0;i<uploadedImages.length;i++){
+                var img = uploadedImages[i];
+                var imgNum = i + 1
+                var task = ref.child('photo'+ String(imgNum)).put(img).then(function(snapshot) {
+                  console.log('Uploaded image' + String(imgNum));
+                });
+            }
+          });
+        </script>
+
     </body>
 </html>
