@@ -283,10 +283,6 @@
         <script>
           firebase.auth().onAuthStateChanged(function(user){
             window.user = user;
-            if (window.user != null){
-                document.querySelector('#loginModalButton').disabled = true;
-                document.querySelector('#loginModalButton').innerText = "Already Logged In";
-            }
           });
         </script>
 
@@ -354,7 +350,9 @@
                       // result.additionalUserInfo.profile == null
                       // You can check if the user is new or existing:
                       // result.additionalUserInfo.isNewUser
-                      console.log('logged in via link!')
+                      document.querySelector('#loginModalButton').disabled = true;
+                      document.querySelector('#loginModalButton').innerText = "Already Logged In";
+                      alert('Successfully logged in via link!');
                     })
                     .catch(function(error) {
                       // Some error occurred, you can inspect the code: error.code
