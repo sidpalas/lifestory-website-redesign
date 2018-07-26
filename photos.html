@@ -55,6 +55,17 @@
           </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                  <p id="uploadStatus">Uploading photos...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
 
         <div class="row outer-row text-center mx-1">
@@ -311,6 +322,7 @@
               });
             });
 
+          const TOTAL_NUM_PHOTOS = 10;
 
           document.querySelector('#submitPhotos').addEventListener('click', function(e) {
             var ref = firebase.storage().ref();
@@ -320,17 +332,24 @@
                     completedPhotos++;
                 }
             }
-            if (completedPhotos < uploadedImages.length || completedPhotos == 0){
-                alert(String(completedPhotos) + "/" + String(uploadedImages.length) + " Completed. \n Please complete all photos before submitting!");
+            if (completedPhotos < TOTAL_NUM_PHOTOS){
+                alert(String(completedPhotos) + "/" + String(TOTAL_NUM_PHOTOS) + " Completed. \n Please complete all photos before submitting!");
             }
             else{
+                $('#uploadModal').modal('show');
+                let uploadPromiseArray = []
                 for (let i=0;i<uploadedImages.length;i++){
                     var img = uploadedImages[i];
                     var imgNum = i + 1
                     var task = ref.child(user.email + '_dreambook_' + String(imgNum)).put(img).then(function(snapshot) {
+                      document.querySelector('#uploadStatus').innerText += "\nPhoto " + String(imgNum) + " upload complete."
                       console.log('Uploaded image' + String(imgNum));
                         });
+                    uploadPromiseArray.append(task);
                 }
+                Promise.all(uploadPromiseArray).then(function(){
+                    $('#uploadModal').modal('hide');
+                });
             }
           });
         </script>
