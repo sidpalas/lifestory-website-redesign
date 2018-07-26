@@ -320,8 +320,7 @@
                     completedPhotos++;
                 }
             }
-
-            if (completedPhotos < uploadedImages.length){
+            if (completedPhotos < uploadedImages.length || completedPhotos == 0){
                 alert(String(completedPhotos) + "/" + String(uploadedImages.length) + " Completed. \n Please complete all photos before submitting!");
             }
             else{
