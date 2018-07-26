@@ -333,7 +333,7 @@
                 }
             }
             if (completedPhotos < TOTAL_NUM_PHOTOS){
-                alert(String(completedPhotos) + "/" + String(TOTAL_NUM_PHOTOS) + " Completed. \n Please complete all photos before submitting!");
+                alert(String(completedPhotos) + "/" + String(TOTAL_NUM_PHOTOS) + " Completed. \nPlease complete all photos before submitting!");
             }
             else{
                 $('#uploadModal').modal('show');
@@ -342,13 +342,14 @@
                     var img = uploadedImages[i];
                     var imgNum = i + 1
                     var task = ref.child(user.email + '_dreambook_' + String(imgNum)).put(img).then(function(snapshot) {
-                      document.querySelector('#uploadStatus').innerText += "\nPhoto " + String(imgNum) + " upload complete."
-                      console.log('Uploaded image' + String(imgNum));
+                        var thisName = snapshot.metadata.name;
+                        document.querySelector('#uploadStatus').innerText += "\n" + thisName + " has finished uploading!"
                         });
                     uploadPromiseArray.push(task);
                 }
                 Promise.all(uploadPromiseArray).then(function(){
                     $('#uploadModal').modal('hide');
+                    alert('Upload complete! \n\n We will be in touch regarding delivery of your book!')
                 });
             }
           });
