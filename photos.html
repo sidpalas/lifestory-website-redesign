@@ -314,14 +314,25 @@
 
           document.querySelector('#submitPhotos').addEventListener('click', function(e) {
             var ref = firebase.storage().ref();
-            console.log(uploadedImages);
+            let completedPhotos = 0
             for (let i=0;i<uploadedImages.length;i++){
-                var img = uploadedImages[i];
-                var imgNum = i + 1
-                var task = ref.child(user.email + '_dreambook_' + String(imgNum)).put(img).then(function(snapshot) {
-                  console.log('Uploaded image' + String(imgNum));
-                    });
+                if typeof(uploadedImages[i]!="undefined"){
+                    completedPhotos++;
                 }
+            }
+
+            if (completedPhotos < uploadedImages.length){
+                alert(String(completedPhotos) + "/" + String(uploadedImages.length) + " Completed. \n Please complete all photos before submitting!");
+            }
+            else{
+                for (let i=0;i<uploadedImages.length;i++){
+                    var img = uploadedImages[i];
+                    var imgNum = i + 1
+                    var task = ref.child(user.email + '_dreambook_' + String(imgNum)).put(img).then(function(snapshot) {
+                      console.log('Uploaded image' + String(imgNum));
+                        });
+                }
+            }
           });
         </script>
 
