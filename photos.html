@@ -345,7 +345,7 @@
                       document.querySelector('#uploadStatus').innerText += "\nPhoto " + String(imgNum) + " upload complete."
                       console.log('Uploaded image' + String(imgNum));
                         });
-                    uploadPromiseArray.append(task);
+                    uploadPromiseArray.push(task);
                 }
                 Promise.all(uploadPromiseArray).then(function(){
                     $('#uploadModal').modal('hide');
