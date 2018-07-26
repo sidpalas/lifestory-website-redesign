@@ -45,7 +45,7 @@
                   </form>
               </div>
               <div class="modal-footer">
-                <button type="button" id="skipLogin" class="btn btn-secondary" data-dismiss="modal">Skip Login (for now)</button>
+                <button type="button" id="skipLogin" class="btn btn-secondary" data-dismiss="modal">Skip Login</button>
                 <button type="button" id="sign-in" class="btn btn-primary" data-dismiss="modal">Validate User</button>
               </div>
               <div class="mx-2">
@@ -217,7 +217,7 @@
                   Log In
                 </button>
                 <!-- Button trigger modal -->
-                <button type="button" id="submitPhotos" class="btn btn-primary" disabled=false>
+                <button type="button" id="submitPhotos" class="btn btn-primary" disabled=true>
                   Submit Photos
                 </button>
 
@@ -352,6 +352,7 @@
                       // result.additionalUserInfo.isNewUser
                       document.querySelector('#loginModalButton').disabled = true;
                       document.querySelector('#loginModalButton').innerText = "Already Logged In";
+                      document.querySelector('#submitPhotos').disabled = false;
                       alert('Successfully logged in via link!');
                     })
                     .catch(function(error) {
